@@ -29,7 +29,7 @@ void display()
 {
 
 
-//glRotated(a,0,0,1);
+glRotated(a,0,0,1);
 glClear(GL_COLOR_BUFFER_BIT);
 int a=0;int b=1;
 for(int i=1;i<=1440;i++)

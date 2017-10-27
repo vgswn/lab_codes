@@ -2,20 +2,26 @@
 
 #include <GL/glut.h>
  GLfloat xRotated, yRotated, zRotated;
+
+
 void display() {
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	    glRotatef(xRotated,1.0,0.0,0.0);
-    glRotatef(yRotated,0.0,1.0,0.0);
-    glRotatef(zRotated,0.0,0.0,1.0);
 	glColor3d(1,0,0);
 	glMatrixMode(GL_MODELVIEW);
 	glOrtho(-100,100,-100,100,0,100);
 	glLoadIdentity();
 	 float tri[3][3]={{0,0,0},{1.0,0,0},{0.5,0.86602,0}};
 	 glTranslatef(0.5f, -0.5f, -6.0f);
+	 //gluLookAt(10,0,0,0,0,0,0,0,1);
+   glRotatef(xRotated,1.0,0.0,0.0);
+    // rotation about Y axis
+    glRotatef(yRotated,0.0,1.0,0.0);
+    // rotation about Z axis
+    glRotatef(zRotated,0.0,0.0,1.0);
 	 glTranslated(0,0,0);
 	 glRotated(-35,1,0,0);
-
+    glColor3d(1,0,0);
     glBegin(GL_POLYGON);
     glVertex2fv(tri[0]);
     glVertex2fv(tri[1]);
@@ -26,7 +32,8 @@ void display() {
     glRotated(90,0,1,0);
 
     glRotated(35,1,0,0);
-    glColor3d(0,1,0);
+        glColor3d(0,1,0);
+
         glBegin(GL_POLYGON);
     glVertex2fv(tri[0]);
     glVertex2fv(tri[1]);
@@ -52,7 +59,7 @@ void display() {
     glRotated(-90,0,1,0);
     glTranslated(0,0,-1);
     glRotated(35,1,0,0);
-            glColor3d(0,1,1);
+        glColor3d(1,0,1);
 
         glBegin(GL_POLYGON);
     glVertex2fv(tri[0]);
@@ -63,6 +70,15 @@ void display() {
     glTranslated(0,0,1);
 
 
+   // glTranslated(-1,0.86,-2);
+glColor3d(1,1,0.5);
+    glBegin(GL_POLYGON);
+    glVertex3d(0,0,0);
+    glVertex3d(0,0,-1);
+    glVertex3d(1,0,-1);
+    glVertex3d(1,0,0);
+
+    glEnd();
 
 
 
@@ -71,6 +87,7 @@ void display() {
 
 
 
+glFlush();
 
 
 	glutSwapBuffers();
@@ -78,20 +95,25 @@ void display() {
 void animation(void)
 {
 
-     yRotated += 25;
-     xRotated += 25;
-
+     yRotated += 0.10;
+     xRotated += 0.10;
+     zRotated+=0.10;
     display();
 }
 
-void reshape(GLsizei width, GLsizei height) {
-	if (height == 0) height = 1;
-	GLfloat aspect = (GLfloat)width / (GLfloat)height;
-	glViewport(0, 0, width, height);
+void reshape(int x, int y)
+{
+    if (y == 0 || x == 0) return;  //Nothing is visible then, so return
+    //Set a new projection matrix
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    //Angle of view:40 degrees
+    //Near clipping plane distance: 0.5
+    //Far clipping plane distance: 20.0
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+    gluPerspective(40.0,(GLdouble)x/(GLdouble)y,0.5,20.0);
+    glMatrixMode(GL_MODELVIEW);
+    glViewport(0,0,x,y);  //Use the whole window for rendering
 }
 
 
@@ -100,12 +122,12 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE);
 	glutInitWindowSize(640, 480);
 	glutInitWindowPosition(400, 200);
-	glutCreateWindow("lab4");
+	glutCreateWindow("lab8");
 	glutDisplayFunc(display);
-	glutIdleFunc(animation);
 	glutReshapeFunc(reshape);
+glutIdleFunc(animation);
 
 	glutMainLoop();
-
 	return 0;
 }
+
