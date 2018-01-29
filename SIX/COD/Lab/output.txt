@@ -1,0 +1,27 @@
+#  special character
+include is identifier
+< operator 
+stdio is identifier
+.  special character
+h is identifier
+> operator 
+
+void  is keywords 
+main is identifier
+(  special character
+)  special character
+
+{  special character
+ 
+printf  is keywords
+(  special character
+"  special character
+\n is Escape sequences
+hai is identifier
+\n is Escape sequences
+"  special character
+)  special character
+;  special character
+
+}  special character
+*/

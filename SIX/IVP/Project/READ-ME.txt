@@ -1,0 +1,70 @@
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+REQUIREMENTS :-
+
+
+STEP 1) Operating System : Ubuntu 16.04 LTS
+
+TO INSTALL : 
+	1.1) https://www.ubuntu.com/download/desktop
+	1.2) Link to ISO image : releases.ubuntu.com/16.04.2/ubuntu-16.04.2-desktop-amd64.iso
+	
+
+
+STEP 2) Programming Language : python 3 ( python 3.5.2 ) , comes by default with ubuntu 16.04 LTS. 
+
+TO INSTALL : https://tecadmin.net/install-python-3-5-on-ubuntu/
+
+
+
+STEP 3) pip3 : Tool for installing python packages
+
+TO INSTALL : bash-command : "sudo apt-get install python3-pip" (without quotes)
+
+
+
+STEP 4) Python Modules :-
+
+	4.1) Open CV : http://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/ ( Install libgtk2.0-dev , Skip Step-3 and Step-5: no need of virtual environment, Add to cmake command : "-D WITH_GTK=ON" )
+		4.1.1) Verify Installation by : Type in bash - 1)python3 2)import cv2
+
+	4.2) Matplotlib : sudo pip3 install matplotlib
+
+	4.3) Numpy : sudo pip3 install numpy
+
+	4.4) Scipy : sudo pip3 install scipy
+	
+	4.5) Scikit-learn : sudo pip3 install scikit-learn
+
+	4.6) Weka : 1)http://www.cs.waikato.ac.nz/ml/weka/downloading.html
+				2)http://prdownloads.sourceforge.net/weka/weka-3-9-1.zip
+
+
+
+STEP 5) Dataset : 1)http://www.kasrl.org/jaffe_info.html	2)http://www.kasrl.org/jaffeimages.zip
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+
+
+
+HOW TO RUN THE CODE :-
+
+STEP 1) Copy the file "file_1.py" and file "file_2.py" to the folder containing images in ".tiff" file extension
+
+STEP 2) Run "file_1.py" by bash command : "python3 file_1.py"(without quotes) ... This will save feature data of 2-D matrix in pickle file format
+
+STEP 3) Run "file_2.py" by bash command : "python3 file_2.py"(without quotes) ... This will create features.arff file which is used as input for weka(tool for data mining and machine learning)
+
+STEP 4) Go to folder where weka is installed and the folder contains weka.jar file. Run weka.jar file by bash command : "java -jar weka.jar"
+
+STEP 5) STEP 4) will open a gui, select "Explorer" option under list of Applications.
+
+STEP 6) In Preprocess Tab, select "Open file..." option, navigate to folder containing "features.arff" created in STEP 3) and open "features.arff" file
+
+STEP 7) Go to classify Tab, choose "lazy" list, select classifier as "IBk" (k instance based classifier : similar to KNN classifier)
+
+STEP 8) Select test option as Cross-validation and enter number of folds as "5"
+
+STEP 9) Click "Start", wait until classify runs, analyze "Classifier output"
+ 
